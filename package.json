@@ -31,6 +31,7 @@
     "react-native-swiper": "^1.6.0",
     "react-native-unimodules": "~0.12.0",
     "react-native-web": "~0.13.12",
+    "react-navigation-stack": "react-navigation/stack",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
