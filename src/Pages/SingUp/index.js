@@ -2,12 +2,12 @@ import React from 'react';
 import {Text} from 'react-native';
 import { Container } from './styles';
 
-function Preload() {
+function SingIn() {
   return (
     <Container>
-      <Text> Preload</Text>
+      <Text> SingIn</Text>
     </Container>
   );
 }
 
-export default Preload;
+export default SingIn;
