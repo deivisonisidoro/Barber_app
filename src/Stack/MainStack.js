@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Preload from "../Pages/Preload";
-import SingIn from "../Pages/SingIn";
-import SingUp from "../Pages/SingUp";
+import Preload from "../pages/Preload";
+import SingIn from "../pages/SingIn";
+import SingUp from "../pages/SingUp";
 
 
 
