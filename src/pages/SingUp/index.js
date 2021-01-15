@@ -1,13 +1,72 @@
-import React from 'react';
-import {Text} from 'react-native';
-import { Container } from './styles';
+import React, { useState } from 'react';
 
-function SingIn() {
+import { 
+  Container,
+  InputArea,
+  CustomButton,
+  CustomButtonText,
+  SingMessageButton,
+  SingMessageButtonText,
+  SingMessageButtonTextBold,
+} from './styles';
+
+import BarberLogo from "../../assets/barber.svg";
+import EmailIcon from "../../assets/email.svg";
+import LockIcon from "../../assets/lock.svg";
+import PersonIcon from "../../assets/person.svg";
+import SingInput from '../../components/SingInput';
+import { useNavigation } from "@react-navigation/native";
+
+function SingUp() {
+  const [ nameField, setNameField] = useState('');
+  const [emailField, setEmailField] = useState('');
+  const [passwordField, setPasswordField] = useState('');
+  const navigation = useNavigation();
+
+  const handleMessageButtonClick = () =>{
+    navigation.reset({
+      routes: [{name: "SingIn" }]
+    })
+  }
+  const hadleSingClick = () =>{
+
+  }
   return (
     <Container>
-      <Text> SingIn</Text>
+      <BarberLogo width="100%" height="160"/>
+      <InputArea>
+        <SingInput
+          IconSvg={PersonIcon}
+          placeholder="Digite seu nome"
+          value={nameField}
+          onChangeText={t=>setNameField(t)}
+        />
+        <SingInput
+          IconSvg={EmailIcon}
+          placeholder="Digite seu e-mail"
+          value={emailField}
+          onChangeText={t=>setEmailField(t)}
+        />
+        <SingInput 
+          IconSvg={LockIcon}
+          placeholder="Digite sua senha"
+          value={passwordField}
+          onChangeText={t=>setPasswordField(t)} 
+          password={true}
+        />
+
+        <CustomButton onPress={hadleSingClick} >
+          <CustomButtonText>CADASTRAR</CustomButtonText>
+        </CustomButton>
+      </InputArea>
+
+      <SingMessageButton onPress={handleMessageButtonClick}>
+        <SingMessageButtonText>Já possui uma conta?</SingMessageButtonText>
+        <SingMessageButtonTextBold>Faça Login</SingMessageButtonTextBold>
+
+      </SingMessageButton>
     </Container>
   );
 }
 
-export default SingIn;
+export default SingUp;

@@ -14,11 +14,21 @@ import BarberLogo from "../../assets/barber.svg";
 import EmailIcon from "../../assets/email.svg";
 import LockIcon from "../../assets/lock.svg";
 import SingInput from '../../components/SingInput';
+import { useNavigation } from "@react-navigation/native";
 
-
-function SingUp() {
-  const [emailField, setEmailField] = useState('deivison');
+function SingIn() {
+  const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
+  const navigation = useNavigation();
+
+  const handleMessageButtonClick = () =>{
+    navigation.reset({
+      routes: [{name: "SingUp" }]
+    })
+  }
+  const hadleSingClick = () =>{
+
+  }
   return (
     <Container>
       <BarberLogo width="100%" height="160"/>
@@ -37,12 +47,12 @@ function SingUp() {
           password={true}
         />
 
-        <CustomButton>
-          <CustomButtonText>Login</CustomButtonText>
+        <CustomButton onPress={hadleSingClick} >
+          <CustomButtonText>LOGIN</CustomButtonText>
         </CustomButton>
       </InputArea>
 
-      <SingMessageButton>
+      <SingMessageButton onPress={handleMessageButtonClick}>
         <SingMessageButtonText>Ainda não possui uma conta?</SingMessageButtonText>
         <SingMessageButtonTextBold>Cadastre-se</SingMessageButtonTextBold>
 
@@ -51,4 +61,4 @@ function SingUp() {
   );
 }
 
-export default SingUp;
+export default SingIn;
