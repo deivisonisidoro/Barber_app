@@ -18,6 +18,6 @@ export default ()=>(
     <Stack.Screen name="Preload" component={Preload}/>
     <Stack.Screen name="SingIn" component={SingIn}/>
     <Stack.Screen name="SingUp" component={SingUp}/>
-    <Stack.Screen name="MainTab" component={MainTab}/>
+    <Stack.Screen name="MainTab" component={MainTab} />
   </Stack.Navigator>
 )
