@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useContext, useState } from 'react';
+import  { UserContext} from '../../context/UserContext';
 import { 
   Container,
   InputArea,
@@ -16,11 +16,13 @@ import LockIcon from "../../assets/lock.svg";
 import PersonIcon from "../../assets/person.svg";
 import SingInput from '../../components/SingInput';
 import { useNavigation } from "@react-navigation/native";
+import Api from '../../Api';
 
 function SingUp() {
   const [ nameField, setNameField] = useState('');
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
+  const  {dispatch: userDispatch} = useContext(UserContext);
   const navigation = useNavigation();
 
   const handleMessageButtonClick = () =>{
@@ -28,8 +30,28 @@ function SingUp() {
       routes: [{name: "SingIn" }]
     })
   }
-  const hadleSingClick = () =>{
-
+  const hadleSingClick = async() =>{
+    if(nameField && emailField && passwordField){
+      
+      let res = await Api.singUp(nameField, emailField, passwordField);
+      if(res.token){  
+        // await AsyncStorage.setItem('token', res.token);
+        // userDispatch({
+        //   type: 'setAvatar',
+        //   payload:{
+        //     avatar: res.data.avatar
+        //   }
+        // });
+        // navigation.reset({
+        //   routes: [{name: 'MainTab'}]
+        // });
+        alert('deu certo')
+      }else{
+        alert("Error: " +res.error)
+      }
+    }else{
+      alert('Prencha os campos');
+    }
   }
   return (
     <Container>

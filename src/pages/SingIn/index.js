@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
+import  { UserContext} from '../../context/UserContext';
 import { 
   Container,
   InputArea,
@@ -15,10 +15,14 @@ import EmailIcon from "../../assets/email.svg";
 import LockIcon from "../../assets/lock.svg";
 import SingInput from '../../components/SingInput';
 import { useNavigation } from "@react-navigation/native";
+import Api from '../../Api';
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 function SingIn() {
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
+  const  {dispatch: userDispatch} = useContext(UserContext);
   const navigation = useNavigation();
 
   const handleMessageButtonClick = () =>{
@@ -26,8 +30,27 @@ function SingIn() {
       routes: [{name: "SingUp" }]
     })
   }
-  const hadleSingClick = () =>{
+  const hadleSingClick = async () =>{
+    if(emailField && passwordField){
+      let json = await Api.signIn(emailField, passwordField);
+      if(json.token){
+        await AsyncStorage.setItem('token', json.token);
+          userDispatch({
+              type: 'setAvatar',
+              payload:{
+                  avatar: json.data.avatar
+              }
+          });
 
+          navigation.reset({
+              routes:[{name:'MainTab'}]
+          });
+      }else{
+        alert('E-mail ou senha errados!')
+      }
+    }else{
+      alert("Prencha os campos!")
+    }
   }
   return (
     <Container>
