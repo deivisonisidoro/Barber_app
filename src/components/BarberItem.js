@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
 import styled from 'styled-components/native';
@@ -43,8 +44,18 @@ const SeeProfileButtonText = styled.Text`
 
 
 function BarberItem({data}) {
+  const navigaion = useNavigation();
+
+  const handleClick = ()=>{
+    navigaion.navigate('Barber', {
+      id: data.id,
+      name: data.name,
+      avatar: data.avatar,
+      stars: data.stars 
+    });
+  }
   return (
-    <Area>
+    <Area onPress={handleClick}>
       <Avatar source={{uri: data.avatar}}/>
       <InfoArea>
         <UserName>{data.name}</UserName>
