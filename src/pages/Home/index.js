@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Platform, RefreshControl } from 'react-native';
 import { 
   Container,
   Scroller,
@@ -28,6 +28,7 @@ function Home() {
   const [coords, setCoords] =  useState(null);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+  const [refreshing, setRefreshing] = useState(false)
   const handleLocationFinder = async ()=>{
     setCoords(null);
     let result = await request(
@@ -52,24 +53,40 @@ function Home() {
   const getBarbers = async ()=>{
     setLoading(true);
     setList([]);
-    let res = await Api.getBarbers();
-    if(res.error == ""){
-      if(res.loc){
-        setLocationText(res.loc)
-      }
-      setList(res.data);
-    
-    } else{
-      alert("Erro:"+res.error);
+
+    let lat = null;
+    let lng = null;
+    if(coords) {
+        lat = coords.latitude;
+        lng = coords.longitude;
     }
+
+    let res = await Api.getBarbers(lat, lng, locationText);
+    if(res.error == '') {
+        if(res.loc) {
+            setLocationText(res.loc);
+        }
+        setList(res.data);
+    } else {
+        alert("Erro: "+res.error);
+    }
+
     setLoading(false);
   }
+  
   useEffect(()=>{
     getBarbers();
   },[])
+  
+  const onRefresh = () => {
+    setRefreshing(false);
+    getBarbers();
+}
   return (
     <Container>
-      <Scroller>
+      <Scroller refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
+      }>
         <HeaderArea>
           <HeaderTitle numberOfLines={2}>Encontre o seu barbeiro favorito</HeaderTitle>
           <SearchButton onPress={()=>{navigation.navigate('Search')}}>
