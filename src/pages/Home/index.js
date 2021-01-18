@@ -81,7 +81,12 @@ function Home() {
   const onRefresh = () => {
     setRefreshing(false);
     getBarbers();
-}
+  }
+
+  const handleLocationSearch = ()=>{
+    setCoords({});
+    getBarbers();
+  }
   return (
     <Container>
       <Scroller refreshControl={
@@ -100,6 +105,7 @@ function Home() {
            placeholderTextColor="#FFFFFF"
            value={locationText}
            onChangeText={t=>setLocationText(t)}
+           onEndEditing={handleLocationSearch}
           />
           <LocationFinder onPress={handleLocationFinder}>
             <MyLocationIcon width="24" heigth="24" fill="#FFFFFF"/>
