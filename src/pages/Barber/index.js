@@ -13,25 +13,36 @@ import {
   PageBody,
   UserInfoArea,
   ServiceArea,
-  TestimonialArea,
-  UserAvatar, 
-  UserInfo,
-  UserInfoName,
-  UserFavButton,
-  BackButton,
-  LoadingIcon,
   ServiceItem,
   ServicesTitle,
   ServiceInfo,
   ServiceName,
   ServicePrice,
   ServiceChooseButton,
-  ServiceChooseBtnText
+  ServiceChooseBtnText,
+  TestimonialArea,
+  TestimonialItem,
+  TestimonialInfo,
+  TestimonialName,
+  TestimonialBody,
+  UserAvatar, 
+  UserInfo,
+  UserInfoName,
+  UserFavButton,
+  BackButton,
+  LoadingIcon,
+  
 } from './styles';
 import Api from '../../Api';
 import Stars from '../../components/Stars'
 import FavoriteIcon from "../../assets/favorite.svg";
 import BackIcon from '../../assets/back.svg';
+import NavPrevIcon from '../../assets/nav_prev.svg';
+import NavNextIcon from '../../assets/nav_next.svg';
+
+
+
+
 function Barber() {
   const navigation = useNavigation();
   const route = useRoute();
@@ -116,9 +127,30 @@ function Barber() {
               ))}
             </ServiceArea>
           }
-          <TestimonialArea>
-
-          </TestimonialArea>
+          {userInfo.testimonials  && userInfo.testimonials.length > 0  && 
+            <TestimonialArea>
+              <Swiper
+              style={{height: 110}}
+              showsPagination={false}
+              showsButtons
+              prevButton={<NavPrevIcon width="35" height="35" fill="#000000"/>}
+              nextButton={<NavNextIcon width="35" height="35" fill="#000000"/>}
+              >
+                 {userInfo.testimonials.map((item, key)=>(
+                   <TestimonialItem key={key}>
+                      <TestimonialInfo>
+                        <TestimonialName>{item.name}</TestimonialName>
+                        <Stars stars={item.rate}  showNumber={false} />
+                      </TestimonialInfo>
+                      <TestimonialBody>
+                          {item.body}
+                        </TestimonialBody>
+                   </TestimonialItem>
+                 ))}
+              </Swiper>
+            </TestimonialArea>  
+          }
+          
         </PageBody>
       </Scroller>
       <BackButton onPress={handleBackButton}>
