@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
+
 import { 
   Container,
   Scroller,
@@ -17,10 +18,12 @@ import {
   UserInfo,
   UserInfoName,
   UserFavButton,
+  BackButton,
 } from './styles';
 import Api from '../../Api';
 import Stars from '../../components/Stars'
-import FavoriteIcon from "../../assets/favorite.svg"
+import FavoriteIcon from "../../assets/favorite.svg";
+import BackIcon from '../../assets/back.svg';
 function Barber() {
   const navigation = useNavigation();
   const route = useRoute();
@@ -37,7 +40,7 @@ function Barber() {
       setLoading(true);
       let json = await Api.getBarber(userInfo.id);
       if(json.error == ''){
-        setUserInfo(json.data);
+       setUserInfo(json.data);
       }else{
         alert('Error:'+json.error);
       }
@@ -45,6 +48,9 @@ function Barber() {
     };
     getBarberInfo();
   },[]);
+  const handleBackButton=()=>{
+    navigation.goBack();
+  }
   return (
     <Container>
        <Scroller>
@@ -91,6 +97,9 @@ function Barber() {
           </TestimonialArea>
         </PageBody>
       </Scroller>
+      <BackButton onPress={handleBackButton}>
+        <BackIcon width="44" height="44" fill="#FFFFFF" />
+      </BackButton>
     </Container>
     
   );

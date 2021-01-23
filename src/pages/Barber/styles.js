@@ -33,7 +33,8 @@ export const SwipeImage = styled.Image`
   height: 240px;
 `;
 export const FakeSwiper = styled.View`
-  
+   height: 140px;
+   background-color: #63C2D1;
 `;
 
 export const PageBody = styled.View`
@@ -45,7 +46,7 @@ export const PageBody = styled.View`
 
 export const UserInfoArea = styled.View`
   flex-direction: row;
-  margin-top: -30px;
+  margin-top: -30px;  
 `;
 
 export const UserAvatar = styled.Image`
@@ -85,7 +86,14 @@ export const UserInfoName = styled.Text`
 export const ServiceArea = styled.View`
   
 `;
+
 export const TestimonialArea = styled.View`
   
+`;
+export const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
 `;
 
