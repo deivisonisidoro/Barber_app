@@ -84,16 +84,57 @@ export const UserInfoName = styled.Text`
 `;
 
 export const ServiceArea = styled.View`
-  
+  margin-top: 30px;
 `;
 
+
+export const ServiceItem = styled.View`
+  flex-direction: row;
+  margin: 0 30px 20px 30px;
+`;
+export const ServiceInfo = styled.View`
+  flex: 1;
+`;
+export const ServicesTitle = styled.Text`
+   font-size: 18px;
+   font-weight: bold;
+   color: #268596;
+   margin-left: 30px;
+   margin-bottom:20px;
+`;
+export const ServiceName = styled.Text`
+   font-size: 16px;
+   font-weight: bold;
+   color: #268596;
+`;
+export const ServicePrice = styled.Text`
+  font-size: 14px;
+   color: #268596;
+`;
+export const ServiceChooseButton = styled.TouchableOpacity`
+  background-color: #4EADBE;
+  border-radius:10px;
+  padding: 10px 15px;
+`;
+export const ServiceChooseBtnText = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color:#FFFFFF;
+`;
 export const TestimonialArea = styled.View`
   
 `;
+
 export const BackButton = styled.TouchableOpacity`
   position: absolute;
   left: 0;
   top: 0;
   z-index: 9;
 `;
+
+export const LoadingIcon = styled.ActivityIndicator`
+  margin-top: 50px;
+`;
+
+
 

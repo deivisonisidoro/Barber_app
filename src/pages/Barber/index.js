@@ -19,6 +19,14 @@ import {
   UserInfoName,
   UserFavButton,
   BackButton,
+  LoadingIcon,
+  ServiceItem,
+  ServicesTitle,
+  ServiceInfo,
+  ServiceName,
+  ServicePrice,
+  ServiceChooseButton,
+  ServiceChooseBtnText
 } from './styles';
 import Api from '../../Api';
 import Stars from '../../components/Stars'
@@ -89,9 +97,25 @@ function Barber() {
               <FavoriteIcon width="24" height="24" fill="#FF0000" />
             </UserFavButton>
           </UserInfoArea>
-          <ServiceArea>
-
-          </ServiceArea>
+          {loading && <LoadingIcon size="large" color="#000000" />}
+          {userInfo.services && 
+            <ServiceArea>
+              <ServicesTitle>Lista de serviços</ServicesTitle>
+              {userInfo.services.map((item, key)=>(
+                <ServiceItem key={key}>
+                  <ServiceInfo>
+                    <ServiceName>{item.name}</ServiceName>
+                    <ServicePrice>R${item.price}</ServicePrice>
+                  </ServiceInfo>
+                  <ServiceChooseButton>
+                    <ServiceChooseBtnText>
+                      Agendar
+                    </ServiceChooseBtnText>
+                  </ServiceChooseButton>
+                </ServiceItem>
+              ))}
+            </ServiceArea>
+          }
           <TestimonialArea>
 
           </TestimonialArea>
